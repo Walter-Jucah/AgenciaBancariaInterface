@@ -3,6 +3,8 @@ package Programa;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class AgenciaBancaria {
 
     static Scanner input = new Scanner(System.in);
@@ -15,19 +17,14 @@ public class AgenciaBancaria {
 
     public static void operacoes() {
 
-        System.out.println("------------------------------------------------------");
-        System.out.println("-------------Bem vindos a nossa Agência---------------");
-        System.out.println("------------------------------------------------------");
-        System.out.println("***** Selecione uma operação que deseja realizar *****");
-        System.out.println("------------------------------------------------------");
-        System.out.println("|   Opção 1 - Criar conta   |");
-        System.out.println("|   Opção 2 - Depositar     |");
-        System.out.println("|   Opção 3 - Sacar         |");
-        System.out.println("|   Opção 4 - Transferir    |");
-        System.out.println("|   Opção 5 - Listar        |");
-        System.out.println("|   Opção 6 - Sair          |");
-
-        int operacao = input.nextInt();
+        int operacao = Integer.parseInt(JOptionPane.showInputDialog(
+                "--- Selecione uma operação ---" +
+                        "|   Opção 1 - Criar conta" +
+                        "|   Opção 2 - Depositar" +
+                        "|   Opção 3 - Sacar" +
+                        "|   Opção 4 - Transferir" +
+                        "|   Opção 5 - Listar" +
+                        "|   Opção 6 - Sair"));
 
         switch (operacao) {
 
@@ -52,6 +49,7 @@ public class AgenciaBancaria {
                 break;
 
             case 6:
+                JOptionPane.showMessageDialog(null, "Obrigado por usar nossa agencia");
                 System.out.println("Obrigado por usar nossa agencia");
                 System.exit(0);
 
