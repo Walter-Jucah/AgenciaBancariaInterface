@@ -17,14 +17,13 @@ public class AgenciaBancaria {
 
     public static void operacoes() {
 
-        int operacao = Integer.parseInt(JOptionPane.showInputDialog(
-                "--- Selecione uma operação ---" +
-                        "|   Opção 1 - Criar conta" +
-                        "|   Opção 2 - Depositar" +
-                        "|   Opção 3 - Sacar" +
-                        "|   Opção 4 - Transferir" +
-                        "|   Opção 5 - Listar" +
-                        "|   Opção 6 - Sair"));
+        int operacao = Integer.parseInt(JOptionPane.showInputDialog("\n--- Selecione uma operação ---" +
+                "\n|   Opção 1 - Criar conta" +
+                "\n|   Opção 2 - Depositar" +
+                "\n|   Opção 3 - Sacar" +
+                "\n|   Opção 4 - Transferir" +
+                "\n|   Opção 5 - Listar" +
+                "\n|   Opção 6 - Sair"));
 
         switch (operacao) {
 
@@ -50,11 +49,10 @@ public class AgenciaBancaria {
 
             case 6:
                 JOptionPane.showMessageDialog(null, "Obrigado por usar nossa agencia");
-                System.out.println("Obrigado por usar nossa agencia");
                 System.exit(0);
 
             default:
-                System.out.println("Opcao invalida");
+                JOptionPane.showMessageDialog(null, "Opcao invalida");
                 operacoes();
                 break;
 
@@ -64,23 +62,18 @@ public class AgenciaBancaria {
 
     public static void criarConta() {
 
-        System.out.println("\nNome: ");
-        String nome = input.next();
+        Pessoa pessoa = new Pessoa();
 
-        System.out.println("\nCPF: ");
-        String cpf = input.next();
-
-        System.out.println("\nEmail: ");
-        String email = input.next();
-
-        Pessoa pessoa = new Pessoa(nome, cpf, email);
+        pessoa.setNome(JOptionPane.showInputDialog("Nome:"));
+        pessoa.setCpf(JOptionPane.showInputDialog("CPF:"));
+        pessoa.setEmail(JOptionPane.showInputDialog("Email:"));
 
         Conta conta = new Conta(pessoa);
 
         contasBancarias.add(conta);
-        System.out.println("Conta criada com sucesso!");
-
+        JOptionPane.showMessageDialog(null, "Conta criada com sucesso!");
         operacoes();
+
     }
 
     public static Conta encontrarConta(int numeroConta) {
@@ -98,61 +91,58 @@ public class AgenciaBancaria {
     }
 
     public static void depositar() {
-        System.out.println("Numero da conta: ");
-        int numeroConta = input.nextInt();
+
+        int numeroConta = Integer.parseInt(JOptionPane.showInputDialog(" Número da conta para depósito:"));
 
         Conta conta = encontrarConta(numeroConta);
 
         if (conta != null) {
-            System.out.println("Qual valor deseja depositar?");
-            Double valorDeposito = input.nextDouble();
+            Double valorDeposito = Double.parseDouble(JOptionPane.showInputDialog(" Qual valor deseja depositar? "));
             conta.depositar(valorDeposito);
-            System.out.println("Valor depositado com sucesso");
+            JOptionPane.showMessageDialog(null, "Valor depositado com sucesso");
         } else {
-            System.out.println("Conta nao encontrada");
+            JOptionPane.showMessageDialog(null, "Conta nao encontrada");
         }
 
         operacoes();
     }
 
     public static void sacar() {
-        System.out.println("Numero da conta: ");
-        int numeroConta = input.nextInt();
+        int numeroConta = Integer.parseInt(JOptionPane.showInputDialog(" Número da conta para saque:"));
 
         Conta conta = encontrarConta(numeroConta);
 
         if (conta != null) {
-            System.out.println("Qual valor deseja sacar?");
-            Double valorSaque = input.nextDouble();
+            Double valorSaque = Double.parseDouble(JOptionPane.showInputDialog(" Qual valor deseja sacar? "));
             conta.sacar(valorSaque);
-            System.out.println("Valor sacado com sucesso");
+            JOptionPane.showMessageDialog(null, "Valor sacado com sucesso");
         } else {
-            System.out.println("Conta nao encontrada");
+            JOptionPane.showMessageDialog(null, "Conta nao encontrada");
         }
 
         operacoes();
     }
 
     public static void transferir() {
-        System.out.println("Numero da conta do remetente: ");
-        int numeroContaRemetente = input.nextInt();
+        int numeroContaRemetente = Integer.parseInt(JOptionPane.showInputDialog(" Numero da conta do remetente: "));
 
         Conta contaRemetente = encontrarConta(numeroContaRemetente);
 
         if (contaRemetente != null) {
-            System.out.println("Numero da conta do destinatario: ");
-            int numeroContaDestinatario = input.nextInt();
+            int numeroContaDestinatario = Integer
+                    .parseInt(JOptionPane.showInputDialog(" Numero da conta do destinatario: "));
 
             Conta contaDestinatario = encontrarConta(numeroContaDestinatario);
 
             if (contaDestinatario != null) {
-                System.out.println("Valor da transferencia: ");
-                Double valor = input.nextDouble();
+                Double valor = Double.parseDouble(JOptionPane.showInputDialog(" Valor da transferencia: "));
 
                 contaRemetente.transferir(contaDestinatario, valor);
-                System.out.println("Valor transferido com sucesso");
-
+                JOptionPane.showMessageDialog(null, "Valor transferido com sucesso");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Conta nao encontrada");
+
         }
 
         operacoes();
@@ -161,10 +151,10 @@ public class AgenciaBancaria {
     public static void listar() {
         if (contasBancarias.size() > 0) {
             for (Conta conta : contasBancarias) {
-                System.out.println(conta);
+                JOptionPane.showMessageDialog(null, conta);
             }
         } else {
-            System.out.println("Não há contas cadastradas");
+            JOptionPane.showMessageDialog(null, "Não há contas cadastradas");
         }
 
         operacoes();
